@@ -10,9 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
-import django_heroku
 
-from pathlib import Path
+from pathlib import Path, django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -101,7 +100,7 @@ DATABASES = {
         'USER': 'smmgnjchxjemxa',
         'PASSWORD': '729b4be871a88e6794eff0052d49c6fbd2aa838627f5911d64d10ad86d2d6d4d',
         'HOST': 'ec2-34-236-87-247.compute-1.amazonaws.com',
-        'PORT' : '5432',
+        'Port' : '5432',
     }
 }
 
@@ -141,11 +140,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-# STATIC_URL = '/static/'
-
 STATIC_URL = '/static/'
-STATIC_ROOT=  os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT=  os.path.join(BASE_DIR,'assets')
 django_heroku.settings(locals())
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
