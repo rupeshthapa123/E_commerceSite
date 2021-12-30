@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+import os
+import django_heroku
 
 from pathlib import Path
 
@@ -25,7 +27,7 @@ SECRET_KEY = 'q@nrrmh5v033-i7xk%(t$+sij1*1q%h-&3=nsp7ymcoe7hh%*4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['liteyagamee.herokuapp.com']
 
 STRIPE_SECRET_KEY = 'sk_test_51JZs3TEB4cfHqdp2Hvq1N9VgDMvCVjNmV7eVYmjoIJmBkzLHuH4a5mVWXK9NsXSPfNLb7cMbW7wZTHdfzvL6uRa90010ZIY5Dg'
 # Application definition
@@ -86,13 +88,22 @@ WSGI_APPLICATION = 'E_commerceSite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd8vom6te2ogp3v',
+        'USER': 'smmgnjchxjemxa',
+        'PASSWORD': '729b4be871a88e6794eff0052d49c6fbd2aa838627f5911d64d10ad86d2d6d4d',
+        'HOST': 'ec2-34-236-87-247.compute-1.amazonaws.com',
+        'PORT' : '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -130,7 +141,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+# STATIC_URL = '/static/'
+
 STATIC_URL = '/static/'
+STATIC_ROOT=  os.path.join(BASE_DIR, 'staticfiles')
+django_heroku.settings(locals())
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
