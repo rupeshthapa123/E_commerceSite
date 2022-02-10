@@ -26,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'q@nrrmh5v033-i7xk%(t$+sij1*1q%h-&3=nsp7ymcoe7hh%*4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['liteyagamee.herokuapp.com']
+ALLOWED_HOSTS = ['liteyagamee.herokuapp.com', 'localhost']
 
 STRIPE_SECRET_KEY = 'sk_test_51JZs3TEB4cfHqdp2Hvq1N9VgDMvCVjNmV7eVYmjoIJmBkzLHuH4a5mVWXK9NsXSPfNLb7cMbW7wZTHdfzvL6uRa90010ZIY5Dg'
 # Application definition
@@ -145,11 +145,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-# STATIC_ROOT=  os.path.join(BASE_DIR,'static')
+STATIC_ROOT=  os.path.join(BASE_DIR,'static')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'dist/static')
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'dist/static')
+# ]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 django_heroku.settings(locals())
