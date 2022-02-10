@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'q@nrrmh5v033-i7xk%(t$+sij1*1q%h-&3=nsp7ymcoe7hh%*4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
 ALLOWED_HOSTS = ['liteyagamee.herokuapp.com']
 
@@ -50,13 +50,16 @@ INSTALLED_APPS = [
     'order'
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080"
-]
+CORS_ORIGIN_ALLOW_ALL = False
+
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:8080"
+# ]
 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -71,7 +74,7 @@ ROOT_URLCONF = 'E_commerceSite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'dist')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -142,10 +145,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+# STATIC_ROOT=  os.path.join(BASE_DIR,'static')
 STATIC_URL = '/static/'
-STATIC_ROOT=  os.path.join(BASE_DIR,'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'dist/static')
+]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 django_heroku.settings(locals())
 
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
